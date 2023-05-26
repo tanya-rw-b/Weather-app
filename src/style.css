@@ -1,3 +1,13 @@
+.body-for-styling {
+  max-width: 600px;
+  margin: 40px auto;
+  width: 100%;
+  padding: 20px 40px;
+  border-color: black;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
 h1 {
   font-size: 16px;
   text-align: right;
@@ -28,14 +38,7 @@ a:link {
 
   padding-left: 20px;
 }
-.container {
-  width: 100%;
-  padding: 20px 40px;
-  border-color: black;
-  border: 1px solid;
-  border-radius: 10px;
-  margin: 20px auto;
-}
+
 .forecast-image {
   text-align: center;
   font-size: 30px;
@@ -60,4 +63,10 @@ li {
 }
 #description {
   font-size: 24px;
+}
+
+.footer {
+  font-size: 14px;
+  display: block;
+  text-align: center;
 }
