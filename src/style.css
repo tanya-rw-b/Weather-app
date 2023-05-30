@@ -30,13 +30,21 @@ h2 {
 .units {
   font-size: 16px;
   text-align: right;
-  padding-right: 20px;
   position: relative;
   top: -30px;
 }
-.temperature {
+
+.temp {
+  color: red;
+  text-align: justify;
+  padding-left: 24px;
+}
+#temperature {
   font-size: 60px;
-  text-align: right;
+}
+#extra-weather-info {
+  text-align: left;
+  padding: 0;
 }
 
 a:link {
@@ -65,6 +73,10 @@ a:link {
 li {
   list-style: none;
 }
+li .firstletter {
+  text-transform: capitalize;
+}
+
 #description {
   font-size: 24px;
 }
