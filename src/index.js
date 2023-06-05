@@ -28,26 +28,34 @@ let day = days[now.getDay()];
 let showDate = document.querySelector("#show-date");
 showDate.innerHTML = `${day} ${hour}:${minute}`;
 
-// function alter() {
-//   let changeTemp = document.querySelector("#temperature");
-//   changeTemp.innerHTML = `53`;
-// }
+// changing temperature from C to F (and back)
+function alterFahr(event) {
+  event.preventDefault();
+  let changeTemp = document.querySelector("#temperature");
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  changeTemp.innerHTML = Math.round(fahrenheitTemp);
+}
 
-// function alterCels() {
-//   let changeTemp = document.querySelector("#temperature");
-//   changeTemp.innerHTML = `19`;
-// }
+function alterCels(event) {
+  event.preventDefault();
+  let changeTemp = document.querySelector("#temperature");
+  changeTemp.innerHTML = celsiusTemperature;
+}
 
-// let showFahrenheit = document.querySelector("#fahrenheit-link");
-// showFahrenheit.addEventListener("click", alter);
-// let showCelsius = document.querySelector("#celsius-link");
-// showCelsius.addEventListener("click", alterCels);
+let showFahrenheit = document.querySelector("#fahrenheit-link");
+showFahrenheit.addEventListener("click", alterFahr);
+let showCelsius = document.querySelector("#celsius-link");
+showCelsius.addEventListener("click", alterCels);
 
+// search function - changing city with API weather
 function changeCityAndTemp(response) {
   document.querySelector("#city").innerHTML = response.data.city;
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.temperature.current
   );
+
+  celsiusTemperature = Math.round(response.data.temperature.current);
+
   console.log(response.data);
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
@@ -78,8 +86,6 @@ function search(city) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearch);
 
-search("London");
-
 // current location button
 
 function searchCurrentLocation(position) {
@@ -97,9 +103,7 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#currentLocationButton");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-// function changeCurrentCityAndTemp(response) {
-//   document.querySelector("#city").innerHTML = response.data.name;
-//   document.querySelector("#temperature").innerHTML = Math.round(
-//     response.data.main.temp
-//   );
-// }
+let celsiusTemperature = null;
+
+// search - to have London as "home city"
+search("London");
