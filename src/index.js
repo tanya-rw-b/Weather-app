@@ -56,12 +56,9 @@ function changeCityAndTemp(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
-  document
-    .querySelector("#icon")
-    .setAttribute(
-      "src",
-      "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
-    );
+  let weatherIcon = response.data.condition.icon_url;
+  console.log(response.data.condition.icon_url);
+  document.querySelector("#icon").setAttribute("src", `${weatherIcon}`);
 }
 
 function handleSearch(event) {

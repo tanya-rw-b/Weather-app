@@ -44,14 +44,15 @@ h2 {
 #extra-weather-info {
   text-align: left;
   padding: 0;
+  font-size: 14px;
 }
 
 a:link {
   text-decoration: none;
 }
-.cloud-night {
-  font-size: 120px;
-  padding-left: 20px;
+#icon {
+  transform: scale(1.5);
+  padding-left: 30px;
 }
 
 .forecast-image {
@@ -78,7 +79,7 @@ li {
 }
 
 #description {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .footer {
