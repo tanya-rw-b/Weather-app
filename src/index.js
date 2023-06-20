@@ -105,5 +105,42 @@ currentLocationButton.addEventListener("click", getCurrentLocation);
 
 let celsiusTemperature = null;
 
-// search - to have London as "home city"
+// forecast //
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<div class="row justify-content-evenly forecast-text">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="card col-2">
+     <div class="card-body">
+     <h5 class="card-title">${day}</h5>
+      <i class="fa-solid fa-cloud-sun-rain forecast-image"></i>
+      <p class="card-text">9/48</p>
+    </div>
+  </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+// search - to have London as "home city" //
 search("London");
+
+displayForecast();
+
+// <!-- <div class="row justify-content-evenly forecast-text">
+//   <div class="card col-2">
+//     <div class="card-body">
+//       <h5 class="card-title">Mon</h5>
+//       <i class="fa-solid fa-cloud-sun-rain forecast-image"></i>
+//       <p class="card-text">9/48</p>
+//     </div>
+//   </div>
+// </div> -->
