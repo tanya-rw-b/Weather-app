@@ -47,8 +47,7 @@ showFahrenheit.addEventListener("click", alterFahr);
 let showCelsius = document.querySelector("#celsius-link");
 showCelsius.addEventListener("click", alterCels);
 
-function getForecastInfo(coordinates) {
-  console.log(coordinates);
+function getForecastInfo(response) {
   let apiKey = "df412te5204935315ab18f0e317o5066";
   let city = document.querySelector("#city-input").value;
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
@@ -77,7 +76,7 @@ function changeCityAndTemp(response) {
   console.log(response.data.condition.icon_url);
   document.querySelector("#icon").setAttribute("src", `${weatherIcon}`);
 
-  getForecastInfo(response.);
+  getForecastInfo(response);
 }
 
 function handleSearch(event) {
@@ -119,6 +118,8 @@ let celsiusTemperature = null;
 // forecast //
 
 function displayForecast(response) {
+  console.log(response);
+
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
