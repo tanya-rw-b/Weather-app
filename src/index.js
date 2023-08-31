@@ -47,6 +47,15 @@ showFahrenheit.addEventListener("click", alterFahr);
 let showCelsius = document.querySelector("#celsius-link");
 showCelsius.addEventListener("click", alterCels);
 
+function getForecastInfo(coordinates) {
+  console.log(coordinates);
+  let apiKey = "df412te5204935315ab18f0e317o5066";
+  let city = document.querySelector("#city-input").value;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 // search function - changing city with API weather
 function changeCityAndTemp(response) {
   document.querySelector("#city").innerHTML = response.data.city;
@@ -67,6 +76,8 @@ function changeCityAndTemp(response) {
   let weatherIcon = response.data.condition.icon_url;
   console.log(response.data.condition.icon_url);
   document.querySelector("#icon").setAttribute("src", `${weatherIcon}`);
+
+  getForecastInfo(response.);
 }
 
 function handleSearch(event) {
@@ -107,7 +118,7 @@ let celsiusTemperature = null;
 
 // forecast //
 
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
