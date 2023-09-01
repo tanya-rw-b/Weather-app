@@ -64,7 +64,6 @@ function changeCityAndTemp(response) {
 
   celsiusTemperature = Math.round(response.data.temperature.current);
 
-  console.log(response.data);
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
   document.querySelector("#humidity").innerHTML =
@@ -73,7 +72,7 @@ function changeCityAndTemp(response) {
     response.data.wind.speed
   );
   let weatherIcon = response.data.condition.icon_url;
-  console.log(response.data.condition.icon_url);
+
   document.querySelector("#icon").setAttribute("src", `${weatherIcon}`);
 
   getForecastInfo(response);
@@ -114,32 +113,49 @@ let currentLocationButton = document.querySelector("#currentLocationButton");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 let celsiusTemperature = null;
+search("London");
 
 // forecast //
 
-function displayForecast(response) {
-  console.log(response.data.daily);
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+  return days[day];
+}
+
+function displayForecast(response) {
   let forecast = response.data.daily;
 
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-
-  let forecastHTML = `<div class="row justify-content-evenly forecast-text">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="card col-2">
-     <div class="card-body">
-     <h5 class="card-title">${day}</h5>
-      <i class="fa-solid fa-cloud-sun-rain forecast-image"></i>
-      <p class="card-text">9/48</p>
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+    <div class="col-2">
+      <div class="weather-forecast-day">${formatDay(forecastDay.time)}</div>
+      <img
+        src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+          forecastDay.condition.icon
+        }.png"
+        width="40px;"
+      />
+      <div class="weather-forecast-temp">
+        <span class="weather-forecast-temp-max">${Math.round(
+          forecastDay.temperature.maximum
+        )}°/</span>
+        <span class="weather-forecast-temp-min">${Math.round(
+          forecastDay.temperature.minimum
+        )}°</span>
+      </div>
     </div>
-  </div>
   `;
+    }
   });
-
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
