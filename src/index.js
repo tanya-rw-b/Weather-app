@@ -47,9 +47,8 @@ showFahrenheit.addEventListener("click", alterFahr);
 let showCelsius = document.querySelector("#celsius-link");
 showCelsius.addEventListener("click", alterCels);
 
-function getForecastInfo(response) {
+function getForecastInfo(city) {
   let apiKey = "df412te5204935315ab18f0e317o5066";
-  let city = document.querySelector("#city-input").value;
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
 
   axios.get(apiUrl).then(displayForecast);
@@ -75,7 +74,7 @@ function changeCityAndTemp(response) {
 
   document.querySelector("#icon").setAttribute("src", `${weatherIcon}`);
 
-  getForecastInfo(response);
+  getForecastInfo(response.data.city);
 }
 
 function handleSearch(event) {
@@ -162,8 +161,6 @@ function displayForecast(response) {
 
 // search - to have London as "home city" //
 search("London");
-
-displayForecast();
 
 // <!-- <div class="row justify-content-evenly forecast-text">
 //   <div class="card col-2">
